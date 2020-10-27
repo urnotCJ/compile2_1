@@ -193,7 +193,7 @@ public final class Analyser {
         // 'begin'
         expect(TokenType.Begin);
 
-        analyseMain();
+        //analyseMain();
 
         // 'end'
         expect(TokenType.End);
@@ -396,7 +396,7 @@ public final class Analyser {
     private void analyseOutputStatement() throws CompileError {
         // 输出语句 -> 'print' '(' 表达式 ')' ';'
 
-        //expect(TokenType.Print);
+        expect(TokenType.Print);
         expect(TokenType.LParen);
 
         analyseExpression();
