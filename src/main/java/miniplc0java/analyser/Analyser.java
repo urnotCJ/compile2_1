@@ -34,7 +34,7 @@ public final class Analyser {
     }
 
     public List<Instruction> analyse() throws CompileError {
-        analyseProgram();
+        //analyseProgram();
         return instructions;
     }
 
@@ -193,7 +193,7 @@ public final class Analyser {
         // 'begin'
         expect(TokenType.Begin);
 
-        //analyseMain();
+        analyseMain();
 
         // 'end'
         expect(TokenType.End);
