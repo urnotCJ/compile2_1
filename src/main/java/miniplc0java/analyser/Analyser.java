@@ -427,7 +427,6 @@ public final class Analyser {
             else{
                 instructions.add(new Instruction(Operation.DIV));
             }
-            analyseFactor();
         }
 //        while (true) {
 //            // 预读可能是运算符的 token
