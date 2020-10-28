@@ -58,7 +58,7 @@ public class Tokenizer {
         String str = it.linesBuffer.get(s.row).substring(s.col,e.col+1);
         try {
             ans = Integer.parseInt(str);
-            return new Token(TokenType.Ident,ans,s,e);
+            return new Token(TokenType.Uint,ans,s,e);
         } catch (NumberFormatException err) {
             throw new Error("Not implemented");
         }
