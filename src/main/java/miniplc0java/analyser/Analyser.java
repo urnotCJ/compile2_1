@@ -34,7 +34,7 @@ public final class Analyser {
     }
 
     public List<Instruction> analyse() throws CompileError {
-        //analyseProgram();
+        analyseProgram();
         return instructions;
     }
 
@@ -267,7 +267,7 @@ public final class Analyser {
 
             // 加入符号表，请填写名字和当前位置（报错用）
             //String name = /* 名字 */ null;
-            addSymbol(nameToken.getValueString(), initialized, false, /* 当前位置 */ nameToken.getStartPos());
+            addSymbol((String) nameToken.getValue(), initialized, false, /* 当前位置 */ nameToken.getStartPos());
 
             // 如果没有初始化的话在栈里推入一个初始值
             if (!initialized) {
@@ -412,12 +412,19 @@ public final class Analyser {
         analyseFactor();
         // 因子
         while(check(TokenType.Mult)||check(TokenType.Div)){
+            boolean ismul = true;
             if(check(TokenType.Mult)){
                 expect(TokenType.Mult);
-                instructions.add(new Instruction(Operation.MUL));
             }
             else{
                 expect(TokenType.Div);
+                ismul = false;
+            }
+            analyseFactor();
+            if(ismul){
+                instructions.add(new Instruction(Operation.MUL));
+            }
+            else{
                 instructions.add(new Instruction(Operation.DIV));
             }
             analyseFactor();
