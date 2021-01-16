@@ -191,12 +191,10 @@ public final class Analyser {
         // 程序 -> 'begin' 主过程 'end'
         // 示例函数，示例如何调用子程序
         // 'begin'
-        expect(TokenType.Begin);
 
         analyseMain();
 
         // 'end'
-        expect(TokenType.End);
         expect(TokenType.EOF);
     }
 
@@ -223,7 +221,7 @@ public final class Analyser {
             addSymbol(name, true, true, nameToken.getStartPos());
 
             // 等于号
-            expect(TokenType.Equal);
+            expect(TokenType.Eq);
 
             // 常表达式
             var value = analyseConstantExpression();
@@ -242,7 +240,7 @@ public final class Analyser {
         // 变量声明 -> 变量声明语句*
 
         // 如果下一个 token 是 var 就继续
-        while (nextIf(TokenType.Var) != null) {
+        while (nextIf(TokenType.Eq) != null) {
             // 变量声明语句 -> 'var' 变量名 ('=' 表达式)? ';'
 
             // 变量名
@@ -250,8 +248,8 @@ public final class Analyser {
 
             // 变量初始化了吗
             boolean initialized = false;
-            if(check(TokenType.Equal)){
-                expect(TokenType.Equal);
+            if(check(TokenType.Eq)){
+                expect(TokenType.Eq);
 
                 // 常表达式
                 analyseExpression();
@@ -279,12 +277,9 @@ public final class Analyser {
     private void analyseStatementSequence() throws CompileError {
         // 语句序列 -> 语句*
         // 语句 -> 赋值语句 | 输出语句 | 空语句
-        while(check(TokenType.Ident)||check(TokenType.Print)||check(TokenType.Semicolon)){
+        while(check(TokenType.Ident)||check(TokenType.Semicolon)){
             if(check(TokenType.Ident)){
                 analyseAssignmentStatement();
-            }
-            else if(check(TokenType.Print)){
-                analyseOutputStatement();
             }
             else {
                 expect(TokenType.Semicolon);
@@ -370,7 +365,7 @@ public final class Analyser {
         // 赋值语句 -> 标识符 '=' 表达式 ';'
         Token t = expect(TokenType.Ident);
         String name = t.getValueString();
-        expect(TokenType.Equal);
+        expect(TokenType.Eq);
         analyseExpression();
         expect(TokenType.Semicolon);
         // 分析这个语句
@@ -396,7 +391,6 @@ public final class Analyser {
     private void analyseOutputStatement() throws CompileError {
         // 输出语句 -> 'print' '(' 表达式 ')' ';'
 
-        expect(TokenType.Print);
         expect(TokenType.LParen);
 
         analyseExpression();
@@ -411,10 +405,10 @@ public final class Analyser {
         // 项 -> 因子 (乘法运算符 因子)*
         analyseFactor();
         // 因子
-        while(check(TokenType.Mult)||check(TokenType.Div)){
+        while(check(TokenType.Mul)||check(TokenType.Div)){
             boolean ismul = true;
-            if(check(TokenType.Mult)){
-                expect(TokenType.Mult);
+            if(check(TokenType.Mul)){
+                expect(TokenType.Mul);
             }
             else{
                 expect(TokenType.Div);
