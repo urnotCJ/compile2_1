@@ -1,2 +1,2 @@
- begin
-end
+
+"dsdads\'\\\n" 's'

@@ -30,12 +30,10 @@ public final class Analyser {
 
     public Analyser(Tokenizer tokenizer) {
         this.tokenizer = tokenizer;
-        this.instructions = new ArrayList<>();
     }
 
-    public List<Instruction> analyse() throws CompileError {
+    public void analyse() throws CompileError {
         analyseProgram();
-        return instructions;
     }
 
     /**
