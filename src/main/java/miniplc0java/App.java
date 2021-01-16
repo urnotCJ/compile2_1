@@ -75,7 +75,7 @@ public class App {
         int set = -1;
         int tokenlength = 0;
         int num;
-        throw new Error("");
+        //throw new Error("");
     }
 
     private static ArgumentParser buildArgparse() {
