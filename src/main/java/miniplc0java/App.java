@@ -23,8 +23,8 @@ import net.sourceforge.argparse4j.inf.Namespace;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        File file = new File(args[0]);
-        File filewrite = new File(args[1]);
+        File file = new File(args[1]);
+        File filewrite = new File(args[2]);
         FileWriter writer = new FileWriter(filewrite);
         BufferedWriter out = new BufferedWriter(writer);
         out.write("static: 66 6F 6F (`foo`)\n" +
