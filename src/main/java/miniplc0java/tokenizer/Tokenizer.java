@@ -82,20 +82,8 @@ public class Tokenizer {
         //char c = it.nextChar();
         Pos e = it.previousPos();
         String str = it.linesBuffer.get(s.row).substring(s.col,e.col+1);
-        if(str.equals("begin")){
-            return new Token(TokenType.Begin,"begin",s,e);
-        }
-        else if(str.equals("end")){
-            return new Token(TokenType.End,"end",s,e);
-        }
-        else if(str.equals("var")){
-            return new Token(TokenType.Var,"var",s,e);
-        }
-        else if(str.equals("const")){
+        if(str.equals("const")){
             return new Token(TokenType.Const,"const",s,e);
-        }
-        else if(str.equals("print")){
-            return new Token(TokenType.Print,"print",s,e);
         }
         else{
             return new Token(TokenType.Ident,str,s,e);
@@ -113,7 +101,7 @@ public class Tokenizer {
 
             case '*':
                 // 填入返回语句
-                return new Token(TokenType.Mult, '*',it.currentPos(), it.currentPos());
+                return new Token(TokenType.Mul, '*',it.currentPos(), it.currentPos());
 
             case '/':
                 // 填入返回语句
@@ -122,7 +110,7 @@ public class Tokenizer {
 
             case '=':
                 // 填入返回语句
-                return new Token(TokenType.Equal, '=', it.currentPos(), it.currentPos());
+                return new Token(TokenType.Eq, '=', it.currentPos(), it.currentPos());
 
             case ';':
                 // 填入返回语句
