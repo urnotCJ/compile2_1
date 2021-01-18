@@ -359,7 +359,7 @@ public final class Analyser {
             }
         }
         else if(check(TokenType.Minus)){
-            exprType = analyseNegateExpr();
+            //exprType = analyseNegateExpr();
         }
         else if(check(TokenType.Uint)||check(TokenType.Double)||check(TokenType.Char)||check(TokenType.String)){
             ety = analyseLiteralExpr();
@@ -374,7 +374,7 @@ public final class Analyser {
                 ety = analyseAsExpr(ety);
             }
             else{
-                ety = analyseOperatorExpr(ety);
+                //ety = analyseOperatorExpr(ety);
             }
         }
         if(ety.equals("")!=true) {
