@@ -359,7 +359,7 @@ public final class Analyser {
             }
         }
         else if(check(TokenType.Minus)){
-            //exprType = analyseNegateExpr();
+            ety = analyseNegateExpr();
         }
         else if(check(TokenType.Uint)||check(TokenType.Double)||check(TokenType.Char)||check(TokenType.String)){
             ety = analyseLiteralExpr();
@@ -374,7 +374,7 @@ public final class Analyser {
                 ety = analyseAsExpr(ety);
             }
             else{
-                //ety = analyseOperatorExpr(ety);
+                ety = analyseOperatorExpr(ety);
             }
         }
         if(ety.equals("")!=true) {
@@ -588,6 +588,44 @@ public final class Analyser {
             throw new Error("");
 
     }
+
+    private String analyseOperatorExpr(String ety) throws CompileError{
+        Token t = analyseBinaryOperator();
+
+        if (!operator.empty()) {
+            int in = Operator.getOrder(operator.peek());
+            int out = Operator.getOrder(t.getTokenType());
+            if (Operator.priority[in][out] > 0)
+                opinstr(operator.pop(), instructions, ety);
+        }
+        operator.push(t.getTokenType());
+
+        String ty =  analyseExpr();
+        if(ety.equals(ty) && (ety.equals("int") || ety.equals("double")))
+            return ty;
+        else
+            throw new Error("");
+    }
+
+    private Token analyseBinaryOperator() throws CompileError{
+        if(check(TokenType.As) ||
+                check(TokenType.Plus)||
+                check(TokenType.Minus)||
+                check(TokenType.Mul)||
+                check(TokenType.Div)||
+                check(TokenType.Eq)||
+                check(TokenType.Neq)||
+                check(TokenType.Lt)||
+                check(TokenType.Gt)||
+                check(TokenType.Le)||
+                check(TokenType.Ge)){
+            return next();
+        }
+        //不是以上类型
+        else
+            throw new Error("");
+    }
+
 
 
     private SymbolEntry getlibrary(String name) throws CompileError{

@@ -23,10 +23,12 @@ import net.sourceforge.argparse4j.inf.Namespace;
 public class App {
     public static void main(String[] args)  {
         try{
-            InputStream in = new FileInputStream("cj.txt");
+            InputStream in = new FileInputStream(args[0]);
             Scanner scanner = new Scanner(in);
             StringIter it = new StringIter(scanner);
             Tokenizer tokenizer = new Tokenizer(it);
+            Analyser analyser = new Analyser(tokenizer);
+            analyser.analyse();
             throw new Error("");
         }
         catch (Exception err){
