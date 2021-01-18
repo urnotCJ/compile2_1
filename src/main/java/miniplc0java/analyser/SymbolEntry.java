@@ -1,60 +1,131 @@
 package miniplc0java.analyser;
 
+import java.util.ArrayList;
+
 public class SymbolEntry {
-    boolean isConstant;
+    String name;
+    boolean isConstant;//常量
+    String type; //1 int 2 double 3void function
     boolean isInitialized;
-    int stackOffset;
+    int stackOffset;//栈偏移
+    int level;//层数
+    ArrayList<SymbolEntry> params = new ArrayList<>();//函数参数列表
+    String returns;
+    int paramlocation;//参数位置
+    SymbolEntry func;//所属函数
+    int part;//局部变量
+    int global;//全局
 
-    /**
-     * @param isConstant
-     * @param isDeclared
-     * @param stackOffset
-     */
-    public SymbolEntry(boolean isConstant, boolean isDeclared, int stackOffset) {
-        this.isConstant = isConstant;
-        this.isInitialized = isDeclared;
-        this.stackOffset = stackOffset;
+    public SymbolEntry(){}
+
+    public SymbolEntry(String name,boolean isConstant, String type, boolean isInitialized, int stackOffset, int level, ArrayList<SymbolEntry> params, String returns, int paramlocation, SymbolEntry func, int part, int global){
+        this.name=name;
+        this.isConstant=isConstant;
+        this.type=type;
+        this.isInitialized=isInitialized;
+        this.stackOffset=stackOffset;
+        this.level=level;
+        this.params=params;
+        this.returns=returns;
+        this.paramlocation=paramlocation;
+        this.func=func;
+        this.part=part;
+        this.global=global;
     }
 
-    /**
-     * @return the stackOffset
-     */
-    public int getStackOffset() {
-        return stackOffset;
+    public String getName() {
+        return name;
     }
 
-    /**
-     * @return the isConstant
-     */
     public boolean isConstant() {
         return isConstant;
     }
 
-    /**
-     * @return the isInitialized
-     */
+    public String getType() {
+        return type;
+    }
+
     public boolean isInitialized() {
         return isInitialized;
     }
 
-    /**
-     * @param isConstant the isConstant to set
-     */
-    public void setConstant(boolean isConstant) {
-        this.isConstant = isConstant;
+    public int getStackOffset() {
+        return stackOffset;
     }
 
-    /**
-     * @param isInitialized the isInitialized to set
-     */
-    public void setInitialized(boolean isInitialized) {
-        this.isInitialized = isInitialized;
+    public int getLevel() {
+        return level;
     }
 
-    /**
-     * @param stackOffset the stackOffset to set
-     */
+    public ArrayList<SymbolEntry> getParams() {
+        return params;
+    }
+
+    public String getReturns() {
+        return returns;
+    }
+
+    public int getParamlocation() {
+        return paramlocation;
+    }
+
+    public SymbolEntry getFunc() {
+        return func;
+    }
+
+    public int getPart() {
+        return part;
+    }
+
+    public int getGlobal() {
+        return global;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setConstant(boolean constant) {
+        isConstant = constant;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setInitialized(boolean initialized) {
+        isInitialized = initialized;
+    }
+
     public void setStackOffset(int stackOffset) {
         this.stackOffset = stackOffset;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public void setParams(ArrayList<SymbolEntry> params) {
+        this.params = params;
+    }
+
+    public void setReturns(String returns) {
+        this.returns = returns;
+    }
+
+    public void setParamlocation(int paramlocation) {
+        this.paramlocation = paramlocation;
+    }
+
+    public void setFunc(SymbolEntry func) {
+        this.func = func;
+    }
+
+    public void setPart(int part) {
+        this.part = part;
+    }
+
+    public void setGlobal(int global) {
+        this.global = global;
     }
 }
